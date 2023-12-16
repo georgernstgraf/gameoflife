@@ -1,0 +1,23 @@
+section {
+    background: lightpink;
+    border: 2px solid darkmagenta;
+    max-width: 90vh;
+    display: flex;
+    justify-content: center;
+    margin: 1px auto;
+}
+#grid {
+    display: grid;
+    grid-gap: 1px;
+}
+
+/* styling cell below */
+section div {
+    background: white;
+    transition: background-color 0.2s ease;
+    width: auto;
+    aspect-ratio: 1;
+}
+section div.living {
+    background-color: black;
+}
