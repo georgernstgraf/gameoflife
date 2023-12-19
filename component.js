@@ -1,3 +1,4 @@
+'use strict';
 class Component {
     anchor; // DOM-Element, in das ich mich einhänge
     parent; // Component
@@ -37,8 +38,12 @@ class Component {
     hide() {
         this.domElement.hidden = true;
     }
-    addToDom() {
-        this.anchor.appendChild(this.domElement);
+    addToDom(elem) {
+        if (!elem) {
+            throw new Error('Component.addToDom: no elem');
+        }
+        this.domElement = elem;
+        this.anchor.appendChild(elem);
         this.isADomChild = true;
     }
     removeFromDom() {

@@ -13,16 +13,32 @@
 <body>
     <header>
         <section>
-            Game of Life
+            <h2>
+                John Conway's Game of Life
+            </h2>
         </section>
     </header>
     <main>
     </main>
     <footer>
-        <button type="reset" id="glider">Glider</button>
-        <button type="reset">Reset</button>
-        <button type="button" id="go">Go, live!</button>
-        <button type="button" id="stop">Stop</button>
+        <select name="form" id="form">
+            <option selected>-- select --</option>
+            <option>blinker</option>
+            <option>glider</option>
+            <option>beacon</option>
+            <option>toad</option>
+            <option>pulsar</option>
+        </select>
+        <button type="reset" id="reset">Reset</button>
+        <span>
+
+            <button type="button" id="left">←</button>
+            <button type="button" id="up">↑</button>
+            <button type="button" id="down">↓</button>
+            <button type="button" id="right">→</button>
+        </span>
+        <button type="button" id="go">Play</button>
+        <button type="button" id="stop">Pause</button>
     </footer>
 </body>
 
