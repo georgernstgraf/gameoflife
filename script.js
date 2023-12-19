@@ -11,6 +11,8 @@ class Grid extends Component {
     columns;
     rows;
     cells; // Cell[][]
+    relevantCellsNow;
+    relevantCellsFuture;
     intervallId;
     constructor(parent, anchor, columns, rows) {
         super(parent, anchor);
@@ -26,13 +28,14 @@ class Grid extends Component {
         for (let row = 0; row < rows; row++) {
             this.cells[row] = [];
             for (let column = 0; column < columns; column++) {
-                let cell = new Cell(this, this.domElement, row + 1, column + 1);
+                let cell = new Cell(this, this.domElement, row, column);
                 this.cells[row][column] = cell;
             }
         }
+        this.relevantCellsNow = {}; // {row: {column: cell}}
     }
     getCell(row, column) {
-        return this.cells[row - 1][column - 1];
+        return this.cells[row][column];
     }
     calculateFuture() {
         for (let row = 0; row < this.rows; row++) {
@@ -91,15 +94,11 @@ class Cell extends Component {
         this.addToDom();
     }
     calculateFuture() {
-        // actually John Conways Game has an infinite grid, but we have a finite one
+        // actually John Conways Game has an infinite grid
         let rowStart = this.row - 1;
-        if (rowStart < 1) rowStart = 1;
         let rowEnd = this.row + 1;
-        if (rowEnd > this.grid.rows) rowEnd = this.grid.rows;
         let columnStart = this.column - 1;
-        if (columnStart < 1) columnStart = 1;
         let columnEnd = this.column + 1;
-        if (columnEnd > this.grid.columns) columnEnd = this.grid.columns;
         let livingNeighbors = 0;
         for (let row = rowStart; row <= rowEnd; row++) {
             for (let column = columnStart; column <= columnEnd; column++) {
@@ -157,7 +156,7 @@ class Cell extends Component {
 const sectionGrid = document.querySelector('main');
 const grid = new Grid(null, sectionGrid, 50, 50);
 console.log(grid);
-const mycell = grid.getCell(grid.rows, grid.columns);
+const mycell = grid.getCell(grid.rows - 1, grid.columns - 1);
 const goButton = document.querySelector('button#go');
 goButton.addEventListener('click', () => {
     grid.getGoing();
@@ -165,4 +164,8 @@ goButton.addEventListener('click', () => {
 const stopButton = document.querySelector('button#stop');
 stopButton.addEventListener('click', () => {
     grid.pause();
+});
+const gliderButton = document.querySelector('button#glider');
+gliderButton.addEventListener('click', () => {
+    grid.setPattern('glider');
 });
