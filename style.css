@@ -5,10 +5,19 @@ section {
     display: flex;
     justify-content: center;
     margin: 1px auto;
+    flex-direction: column;
 }
 #grid {
     display: grid;
     grid-gap: 1px;
+}
+header > section > p {
+    display: flex;
+    justify-content: space-evenly;
+}
+header > section > h2 {
+    justify-content: center;
+    text-align: center;
 }
 
 /* styling cell below */
