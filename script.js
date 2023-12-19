@@ -268,6 +268,14 @@ class Cell {
         this.setLiving(!this.living);
     }
     updateDisplay() {
+        if (
+            this.row < 0 ||
+            this.column < 0 ||
+            this.row >= this.grid.rows ||
+            this.column >= this.grid.columns
+        ) {
+            return;
+        }
         const cell = document.querySelector(
             `div[data-row="${this.row}"][data-column="${this.column}"]`
         );
@@ -281,7 +289,7 @@ class Cell {
         }
     }
     advanceToNextGeneration() {
-        this.livingThen ??= false; // newly generated in 2nd step
+        this.livingThen ??= false; // newly generated ones in the 2nd step
         this.living = this.livingThen;
         this.livingThen = undefined;
         this.updateDisplay();
