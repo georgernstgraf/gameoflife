@@ -52,7 +52,7 @@ class Grid extends Component {
         this.calculateFuture();
         this.advanceToNextGeneration();
     }
-    getGoing(ms) {
+    getGoing(ms = 250) {
         this.intervallId = setInterval(() => {
             this.ageOneGeneration();
         }, ms);
@@ -91,7 +91,7 @@ class Cell extends Component {
         this.addToDom();
     }
     calculateFuture() {
-        // actually John Conwyas Game has an infinite grid, but we have a finite one
+        // actually John Conways Game has an infinite grid, but we have a finite one
         let rowStart = this.row - 1;
         if (rowStart < 1) rowStart = 1;
         let rowEnd = this.row + 1;
@@ -158,3 +158,11 @@ const sectionGrid = document.querySelector('main');
 const grid = new Grid(null, sectionGrid, 50, 50);
 console.log(grid);
 const mycell = grid.getCell(grid.rows, grid.columns);
+const goButton = document.querySelector('button#go');
+goButton.addEventListener('click', () => {
+    grid.getGoing();
+});
+const stopButton = document.querySelector('button#stop');
+stopButton.addEventListener('click', () => {
+    grid.pause();
+});

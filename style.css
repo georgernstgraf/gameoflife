@@ -21,3 +21,11 @@ section div {
 section div.living {
     background-color: black;
 }
+footer {
+    background: lightpink;
+    border: 2px solid darkmagenta;
+    max-width: 90vh;
+    display: flex;
+    justify-content: space-evenly;
+    margin: 1px auto;
+}
