@@ -1,23 +1,27 @@
-section {
+body {
+    display: flex;
+    flex-direction: column-reverse;
+}
+#grid {
+    display: grid;
+    aspect-ratio: 1;
+    grid-gap: 1px;
+    width: 100%;
     background: lightpink;
     border: 2px solid darkmagenta;
-    max-width: 85vh;
-    display: flex;
+    min-width: 85vw;
     justify-content: center;
     margin: 1px auto;
     flex-direction: column;
 }
-#grid {
-    display: grid;
-    grid-gap: 1px;
-}
-header > section > p {
+header {
     display: flex;
     justify-content: space-evenly;
 }
-header > section > h2 {
+header > * {
     justify-content: center;
     text-align: center;
+    align-self: center;
 }
 
 /* styling cell below */
@@ -33,8 +37,35 @@ section div.living {
 footer {
     background: lightpink;
     border: 2px solid darkmagenta;
-    max-width: 85vh;
+    width: 100%;
     display: flex;
+    flex-direction: row;
     justify-content: space-evenly;
     margin: 1px auto;
+}
+/*  really big */
+@media screen and (min-width: 825px) {
+    body {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    footer {
+        flex-direction: column;
+        order: 0;
+        width: max-content;
+        margin: 0 5px;
+    }
+    header {
+        order: 5;
+    }
+    #grid {
+        max-width: 85vh;
+        min-width: 85vh;
+    }
+}
+/* really small */
+@media screen and (max-width: 475px) {
+    header {
+        flex-direction: column;
+    }
 }
