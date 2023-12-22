@@ -13,15 +13,18 @@ class Grid extends Component {
     rows;
     cells;
     intervallId;
+    offset_x;
+    offset_y;
     constructor(parent, anchor, columns, rows) {
         super(parent, anchor);
         this.columns = columns;
         this.rows = rows;
-        this.addToDom(document.createElement('section'));
+        this.addToDom(document.createElement('div'));
         this.domElement.style.gridTemplateColumns = `repeat(${columns}, 1fr)`;
         this.domElement.style.gridTemplateRows = `repeat(${rows}, 1fr)`;
-        this.domElement.style.display = 'grid';
         this.domElement.id = 'grid';
+        this.offset_x = 0;
+        this.offset_y = 0;
         this.cells = {}; // {row: {column: cell}}
         // Es werden hier nur mehr die dom Elemente erstellt.
         for (let row = 0; row < rows; row++) {
@@ -38,6 +41,7 @@ class Grid extends Component {
     }
     toggleLiving(row, column) {
         this.getCell(row, column).toggleLiving();
+        this.displayLiveCount();
     }
     // creates a cell "on demand"
     getCell(row, column, obj = this.cells) {
@@ -80,6 +84,7 @@ class Grid extends Component {
             }
         }); // 4.
         this.cells = futureCells; // 5.
+        this.displayLiveCount();
     }
     shift(arg) {
         const factor = -5;
@@ -103,6 +108,10 @@ class Grid extends Component {
         }
         offsetRow *= factor;
         offsetColumn *= factor;
+        this.offset_x += offsetColumn;
+        this.offset_y += offsetRow;
+        offsetXButton.textContent = `_x: ${this.offset_x}`;
+        offsetYButton.textContent = `_y: ${this.offset_y}`;
         const futureCells = {};
         [...this.cellIterator()].forEach((cell) => {
             this.getCell(
@@ -114,6 +123,12 @@ class Grid extends Component {
         });
         this.cells = futureCells;
         [...this.cellIterator()].forEach((_) => _.updateDisplay());
+    }
+    displayLiveCount() {
+        const liveCount = [...this.cellIterator()].filter(
+            (_) => _.living
+        ).length;
+        livecountButton.textContent = `#: ${liveCount}`;
     }
     getGoing(ms = 250) {
         if (!(this.intervallId === undefined)) {
@@ -127,6 +142,13 @@ class Grid extends Component {
     pause() {
         clearInterval(this.intervallId);
         this.intervallId = undefined;
+    }
+    reset() {
+        this.pause();
+        [...this.cellIterator()].forEach((cell) => {
+            cell.setLiving(false);
+        });
+        this.displayLiveCount();
     }
     setPattern(pattern) {
         switch (pattern) {
@@ -213,6 +235,7 @@ class Grid extends Component {
             default:
                 console.warn('Grid.setPattern: unknown pattern: ' + pattern);
         }
+        this.displayLiveCount();
     }
 }
 
@@ -296,16 +319,12 @@ class Cell {
     }
 }
 
-const sectionGrid = document.querySelector('main');
-const grid = new Grid(null, sectionGrid, 50, 50);
+const grid = new Grid(null, document.querySelector('main'), 50, 50);
 console.log(grid);
 
 const resetButton = document.querySelector('button#reset');
 resetButton.addEventListener('click', () => {
-    grid.pause();
-    [...grid.cellIterator()].forEach((cell) => {
-        cell.setLiving(false);
-    });
+    grid.reset();
 });
 const goButton = document.querySelector('button#go');
 goButton.addEventListener('click', () => {
@@ -318,7 +337,7 @@ stopButton.addEventListener('click', () => {
 const formSelector = document.querySelector('select#form');
 formSelector.addEventListener('change', (e) => {
     grid.setPattern(e.target.value);
-    e.target.value = '-- select --';
+    e.target.value = '-- drop --';
 });
 
 const shiftLeftButton = document.querySelector('button#left');
@@ -337,3 +356,10 @@ const shiftDownButton = document.querySelector('button#down');
 shiftDownButton.addEventListener('click', () => {
     grid.shift('down');
 });
+const offsetXButton = document.querySelector('button#offset-x');
+const offsetYButton = document.querySelector('button#offset-y');
+const livecountButton = document.querySelector('button#livecount');
+
+function ar() {
+    console.log(`AR: ${window.innerWidth / window.innerHeight}`);
+}

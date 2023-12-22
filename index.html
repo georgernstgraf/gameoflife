@@ -15,14 +15,17 @@
         <h2>
             John Conway's Game of Life
         </h2>
-        <a href="https://glistening-churros-76bc03.netlify.app/">https://glistening-churros-76bc03.netlify.app/</a>
-        <a href="https://github.com/georgernstgraf/gameoflife">https://github.com/georgernstgraf/gameoflife</a>
     </header>
     <main>
+        <!-- the actual grid -->
     </main>
-    <footer>
+    <section id="controls">
+        <h3>Controls</h3>
+        <button type="button" id="offset-x">_x: 0</button>
+        <button type="button" id="offset-y">_y: 0</button>
+        <button type="button" id="livecount">#: 0</button>
         <select name="form" id="form">
-            <option selected>-- select --</option>
+            <option selected>-- drop --</option>
             <option>blinker</option>
             <option>glider</option>
             <option>beacon</option>
@@ -30,15 +33,18 @@
             <option>pulsar</option>
         </select>
         <button type="reset" id="reset">Reset</button>
-        <span>
-
-            <button type="button" id="left">←</button>
-            <button type="button" id="up">↑</button>
-            <button type="button" id="down">↓</button>
-            <button type="button" id="right">→</button>
-        </span>
+        <button type="button" id="left">←</button>
+        <button type="button" id="up">↑</button>
+        <button type="button" id="down">↓</button>
+        <button type="button" id="right">→</button>
         <button type="button" id="go">Play</button>
         <button type="button" id="stop">Pause</button>
+    </section>
+    <footer>
+        <p>Links:
+            <a href="https://glistening-churros-76bc03.netlify.app/">On Netlify</a> and
+            <a href="https://github.com/georgernstgraf/gameoflife">Github Repo</a>
+        </p>
     </footer>
 </body>
 
