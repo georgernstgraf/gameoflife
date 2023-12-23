@@ -148,6 +148,7 @@ class Grid extends Component {
         [...this.cellIterator()].forEach((cell) => {
             cell.setLiving(false);
         });
+        this.cells = {};
         this.displayLiveCount();
     }
     setPattern(pattern) {

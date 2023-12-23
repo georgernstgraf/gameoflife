@@ -9,11 +9,17 @@ body (grid)
 body {
     /* quadratic */
     display: grid;
-    background: lightpink;
+    background: lightsteelblue;
     margin: 0;
     gap: 3px;
     margin: 0 auto;
     /* border: 2px solid darkmagenta; */
+}
+button,
+select {
+    font-size: 1.5em;
+    width: 5em;
+    background: rgb(156, 196, 236);
 }
 main {
     justify-self: center;
@@ -31,7 +37,7 @@ footer {
     background: lightseagreen;
     aspect-ratio: 1/1;
     grid-gap: 1px;
-    border: 2px solid darkmagenta;
+    border: 2px solid lightseagreen;
     margin: 2px auto;
 }
 section#controls {
@@ -59,7 +65,7 @@ section#controls {
     }
     #grid {
         max-height: 95vh;
-        margin-right: 0;
+        margin-right: 1em;
     }
     main {
         grid-column: 2;
@@ -110,7 +116,7 @@ section#controls {
     }
     #grid {
         max-height: 95vh;
-        margin-right: 0;
+        margin-right: 1em;
     }
     section#controls {
         grid-column: 2 / 3;
