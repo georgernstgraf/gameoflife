@@ -1,0 +1,30 @@
+:root {
+    --sudoku-size: min(95dvh, 95dvw);
+    --controls-size: calc(var(--sudoku-size)/2.5)
+}
+
+#controls {
+    width: var(--controls-size)
+}
+
+#grid {
+    display: grid;
+    width: var(--sudoku-size);
+    /* background: lightseagreen; */
+    aspect-ratio: 1/1;
+    grid-gap: 1px;
+    /* border: 2px solid lightseagreen; */
+}
+
+
+/* styling cell below */
+#grid div {
+    background-color: lightskyblue;
+    transition: background-color 0.2s ease;
+    width: auto;
+    aspect-ratio: 1/1;
+}
+
+#grid div.living {
+    background-color: black;
+}

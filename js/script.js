@@ -23,19 +23,22 @@ class Grid extends Component {
         this.domElement.style.gridTemplateColumns = `repeat(${columns}, 1fr)`;
         this.domElement.style.gridTemplateRows = `repeat(${rows}, 1fr)`;
         this.domElement.id = 'grid';
+        "border border-2 p-1 border-dark-subtle".split(" ").forEach(cls => this.domElement.classList.add(cls));
         this.offset_x = 0;
         this.offset_y = 0;
         this.cells = {}; // {row: {column: cell}}
+        this.elements = new Map();
         // Es werden hier nur mehr die dom Elemente erstellt.
         for (let row = 0; row < rows; row++) {
             for (let column = 0; column < columns; column++) {
                 const cell = document.createElement('div');
-                cell.setAttribute('data-row', row);
-                cell.setAttribute('data-column', column);
                 this.domElement.appendChild(cell);
                 cell.addEventListener('click', (e) => {
                     this.toggleLiving(row, column);
                 });
+                const idx = `${row}/${column}`;
+                cell.id = idx;
+                this.elements.set(idx, cell);
             }
         }
     }
@@ -300,9 +303,7 @@ class Cell {
         ) {
             return;
         }
-        const cell = document.querySelector(
-            `div[data-row="${this.row}"][data-column="${this.column}"]`
-        );
+        const cell = this.grid.elements.get(`${this.row}/${this.column}`);
         if (!cell) {
             return;
         }
