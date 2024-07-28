@@ -1,10 +1,11 @@
 :root {
     --sudoku-size: min(95dvh, 95dvw);
-    --controls-size: calc(var(--sudoku-size)/2.5)
+    --controls-size: calc(var(--sudoku-size)/2)
 }
 
 #controls {
-    width: var(--controls-size)
+    width: var(--controls-size);
+    max-width: var(--controls-size)
 }
 
 #grid {

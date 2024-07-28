@@ -23,7 +23,7 @@ class Grid extends Component {
         this.domElement.style.gridTemplateColumns = `repeat(${columns}, 1fr)`;
         this.domElement.style.gridTemplateRows = `repeat(${rows}, 1fr)`;
         this.domElement.id = 'grid';
-        "border border-2 p-1 border-dark-subtle".split(" ").forEach(cls => this.domElement.classList.add(cls));
+        "border border-2 p-1 border-dark-subtle mx-auto".split(" ").forEach(cls => this.domElement.classList.add(cls));
         this.offset_x = 0;
         this.offset_y = 0;
         this.cells = {}; // {row: {column: cell}}
