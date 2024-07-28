@@ -17,10 +17,9 @@
     /* border: 2px solid lightseagreen; */
 }
 
-
 /* styling cell below */
 #grid div {
-    background-color: lightskyblue;
+    background-color: var(--bs-info-bg-subtle);
     transition: background-color 0.2s ease;
     width: auto;
     aspect-ratio: 1/1;
